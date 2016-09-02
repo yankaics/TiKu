@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@drawable/category_item_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="28dp"
+    android:paddingBottom="28dp">
+    <ImageView
+        android:id="@+id/grid_im"
+        android:src="@mipmap/ic_launcher"
+        android:clickable="false"
+        android:contentDescription="@string/empty"
+        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/grid_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:shadowColor="#ccffffff"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="#ff51545a"
+        android:textSize="12sp" />
+</LinearLayout>

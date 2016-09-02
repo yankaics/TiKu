@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99eeeeee"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.tiku.LoginActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:id="@+id/ed_username"
+        android:hint="@string/hint_username"
+        android:drawableLeft="@drawable/ic_username_selector"
+        android:drawablePadding="16dp"
+        android:paddingLeft="16dp"
+        android:singleLine="true"
+        android:textSize="16sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#cccccc" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/white"
+        android:id="@+id/ed_pwd"
+        android:hint="@string/hint_pwd"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_pwd_selector"
+        android:drawablePadding="16dp"
+        android:paddingLeft="16dp"
+        android:singleLine="true"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/btn_selector"
+        android:text="@string/btn_login"
+        android:textColor="#ffffff" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp" >
+
+        <TextView
+            android:id="@+id/tv_forget_pwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:text="@string/tv_forget_pwd"
+            android:textColor="#999999"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="@string/tv_register"
+            android:textColor="#999999"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

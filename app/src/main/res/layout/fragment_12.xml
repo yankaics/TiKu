@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.Fragment_12"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg" >
+
+    <TextView
+        android:id="@+id/question_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16.0dip"
+        android:background="@drawable/answer_titlebg"
+        android:gravity="center_vertical"
+        android:padding="16dip"
+        android:textColor="@color/question_titlt"
+        android:textSize="16.0sp" />
+
+
+
+    <ScrollView
+        android:id="@+id/sv_ask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question_title"
+        android:layout_marginTop="16.0dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/answer_titlebg"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="@string/question_ask"
+                android:textColor="@color/question_titlt"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/question_ask"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="12.0dip"
+                android:padding="16dp"
+                android:textColor="@color/title"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </ScrollView>
+    </RelativeLayout>
+
+</FrameLayout>

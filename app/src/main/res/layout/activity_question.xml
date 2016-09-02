@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.tiku.QuestionActivity">
+    <fragment
+    android:id="@+id/fg_question"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    ></fragment>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ln_bo"
+
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/tv_shangyiti"
+            android:gravity="center"
+            android:drawableTop="@mipmap/answer_footicon01"
+            android:text="上一题"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/tv_shoucang"
+            android:gravity="center"
+            android:drawableTop="@mipmap/answer_footicon02"
+            android:text="收藏"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_xiayiti"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@mipmap/answer_footicon04"
+            android:text="上一题"/>
+    </LinearLayout>
+</RelativeLayout>
