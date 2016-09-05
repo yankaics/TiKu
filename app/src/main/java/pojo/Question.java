@@ -1,9 +1,11 @@
 package pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/9/1.
  */
-public class Question {
+public class Question implements Serializable{
     String content;
     int id;
     int pubTime;

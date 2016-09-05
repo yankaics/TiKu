@@ -308,7 +308,7 @@ public class GetList {
             e.printStackTrace();
         }
         for (int i=0;i<lists.size();i++){
-            System.out.println(lists.get(i).getPubTime()+"@@@@@@@@@@@@@@@@@@@@@@@@");
+//            System.out.println(lists.get(i).getPubTime()+"@@@@@@@@@@@@@@@@@@@@@@@@");
         }
 
         return lists;

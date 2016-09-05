@@ -1,5 +1,6 @@
 package com.example.administrator.tiku;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -78,6 +80,17 @@ public class SousuoActivity extends AppCompatActivity implements View.OnClickLis
             }
         };
 
+        lv_question_sousuo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent1 = new Intent(SousuoActivity.this,QuestionActivity.class);
+
+                intent1.putExtra("question",mohuList.get(position));
+                startActivity(intent1);
+                overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
+            }
+        });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,4 +127,5 @@ public class SousuoActivity extends AppCompatActivity implements View.OnClickLis
         handler.sendMessage(message);
 
     }
+
 }

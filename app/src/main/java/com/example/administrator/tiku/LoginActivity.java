@@ -1,5 +1,6 @@
 package com.example.administrator.tiku;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import collector.ActivityCollector;
+import dialog.LoadingDialog;
 
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tv_register;
 
     Handler handler;
+    private LoadingDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
+
+        dialog = new LoadingDialog(this);
     }
 
     @Override
@@ -75,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:{
+                dialog.show();
                 LoginClick();
 
             }
@@ -115,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String password = json.getString("password");
                             String phone = json.getString("telephone");
 
-                            System.out.println("user"+"+++++++++++++");
+                            dialog.dismiss();
                             Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
@@ -136,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                System.out.println("+++++++++++++++++++++++++++++++++++++++");
+
             }
 
             @Override

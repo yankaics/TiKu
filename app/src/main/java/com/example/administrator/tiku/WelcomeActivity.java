@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 public class WelcomeActivity extends AppCompatActivity {
     private  static  final  int  GOTO_FRAGMENT_ACTIVITY = 0;
     private  static  final  int  GOTO_LOGIN_ACTIVITY = 1;
+    private static final int GOTO_MAIN_ACTIVITY = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         setContentView(view);
         ActionBar actionBar =getSupportActionBar();
-//调用hide方法，隐藏actionbar
+
         actionBar.hide();
         AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
         aa.setDuration(3000);
@@ -36,6 +37,9 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation arg0) {
                 SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
                 boolean f = pref.getBoolean("falg",true);
+                SharedPreferences pref2 = getSharedPreferences("zddl",MODE_PRIVATE);
+                boolean b = pref2.getBoolean("zddl",false);
+                SharedPreferences pref3 = getSharedPreferences("xstp",MODE_PRIVATE);
 
                 if (f){
                     SharedPreferences.Editor editor = getSharedPreferences("data",MODE_PRIVATE).edit();
@@ -44,7 +48,15 @@ public class WelcomeActivity extends AppCompatActivity {
                     mHandler.sendEmptyMessageDelayed(GOTO_FRAGMENT_ACTIVITY,2000);
 
                 }else {
-                    mHandler.sendEmptyMessageDelayed(GOTO_LOGIN_ACTIVITY,2000);
+
+                    if (b){
+                        SharedPreferences.Editor editor = getSharedPreferences("zddl",MODE_PRIVATE).edit();
+                        editor.putBoolean("zddl",true);
+                        editor.commit();
+                        mHandler.sendEmptyMessageDelayed(GOTO_MAIN_ACTIVITY, 2000);
+                    }else {
+                        mHandler.sendEmptyMessageDelayed(GOTO_LOGIN_ACTIVITY, 2000);
+                    }
                 }
             }
             @Override
@@ -66,6 +78,13 @@ public class WelcomeActivity extends AppCompatActivity {
                 break;
                 case GOTO_LOGIN_ACTIVITY:{
                     Intent intent = new Intent(WelcomeActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
+                }
+                break;
+                case GOTO_MAIN_ACTIVITY:{
+                    Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.in_anim,R.anim.out_anim);

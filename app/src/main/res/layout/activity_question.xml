@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.administrator.tiku.QuestionActivity">
-    <fragment
-    android:id="@+id/fg_question"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    ></fragment>
+    <widget.MyViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vp_viewPager"></widget.MyViewPager>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/tv_shangyiti"
+            android:textColor="@android:color/darker_gray"
             android:gravity="center"
             android:drawableTop="@mipmap/answer_footicon01"
             android:text="上一题"/>
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/tv_shoucang"
+            android:textColor="@android:color/darker_gray"
             android:gravity="center"
             android:drawableTop="@mipmap/answer_footicon02"
             android:text="收藏"/>
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_xiayiti"
+            android:textColor="@android:color/darker_gray"
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@mipmap/answer_footicon04"

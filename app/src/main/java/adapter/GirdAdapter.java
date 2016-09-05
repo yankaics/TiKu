@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,8 +62,13 @@ public class GirdAdapter extends BaseAdapter {
         }
 
         holder.textview.setText(list.get(position).getName().toString());
-        getPicture(list.get(position).getIcon(),holder);
-
+        SharedPreferences pref2 = context.getSharedPreferences("xstp",context.MODE_PRIVATE);
+        boolean b = pref2.getBoolean("xstp",true);
+        if (b) {
+            getPicture(list.get(position).getIcon(), holder);
+        }else {
+            holder.imageview.setImageResource(R.mipmap.ic_launcher);
+        }
         return convertView;
 
     }

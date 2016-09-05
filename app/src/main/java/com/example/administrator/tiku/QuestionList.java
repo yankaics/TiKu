@@ -77,20 +77,14 @@ public class QuestionList extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what){
                     case 1:{
-                        System.out.println("我也收到！！！！！！！！！！！");
-                        System.out.println(list.size()+"////////////////////////");
-                        for (int i =0;i<list.size();i++){
-                            System.out.println(list.get(i).getContent()+"====================");
-                            System.out.println(list.get(i).getTypeid()+"**********************");
-                            System.out.println(list.get(i).getPubTime()+"+++++++++++++++++++++");
-                        }
+
 
                         adapter = new QuestionAdapter(list,QuestionList.this);
                         lv_question.setAdapter(adapter);
                     }
                     break;
                     case 2:{
-                        System.out.println("收到！！！！！！！！！！！！！！！！！！");
+
 
                         Message message = new Message();
                         message.what = 1;
@@ -105,8 +99,8 @@ public class QuestionList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent1 = new Intent(QuestionList.this,QuestionActivity.class);
-                int i = list.get(position).getId();
-                intent1.putExtra("id",i);
+
+                intent1.putExtra("question",list.get(position));
                 startActivity(intent1);
                 overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
             }
@@ -208,9 +202,7 @@ public class QuestionList extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        for (int i=0;i<lists.size();i++){
-            System.out.println(lists.get(i).getPubTime()+"@@@@@@@@@@@@@@@@@@@@@@@@");
-        }
+
 
         return lists;
     }

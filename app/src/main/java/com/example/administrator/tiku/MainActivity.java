@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String name = jsonObject.getString("name");
                         message = new GirdMessage(id,icon,name);
                         list.add(message);
-                        System.out.println(list.get(i));
+
                     }
 
                 } catch (JSONException e) {
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this,SousuoActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
-                Toast.makeText(MainActivity.this, "sousuo", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "sousuo", Toast.LENGTH_SHORT).show();
             }
             break;
             case R.id.ln_chengjiu:{
@@ -250,11 +250,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this,QuestionList.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
-                Toast.makeText(MainActivity.this, "sousuo", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "sousuo", Toast.LENGTH_SHORT).show();
             }
             break;
             case R.id.tv_shezhi:{
-
+                Intent intent = new Intent(MainActivity.this,SettingActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
             }
             break;
             case R.id.tv_tuichu:{

@@ -10,6 +10,7 @@
     android:paddingRight="8dp"
     android:paddingTop="28dp"
     android:paddingBottom="28dp">
+
     <ImageView
         android:id="@+id/grid_im"
         android:src="@mipmap/ic_launcher"

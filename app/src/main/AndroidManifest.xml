@@ -30,7 +30,10 @@
         <activity
             android:name=".SousuoActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity"
+
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity
             android:name=".QuestionActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
