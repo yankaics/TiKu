@@ -1,10 +1,15 @@
 package com.example.administrator.tiku;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +33,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @ViewInject(R.id.test_gridview)
     private GridView girdview;
+    @ViewInject(value = R.id.srl)
+    private SwipeRefreshLayout srl;
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -71,6 +79,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GirdAdapter adapter = new GirdAdapter(list,MainActivity.this);
     private Handler handler;
     GetList getList = new GetList();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -82,49 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         x.view().inject(this);
         ActivityCollector.addActivity(this);
 
-        RequestParams params = new RequestParams("http://115.29.136.118:8080/web-question/app/catalog?method=list");
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                try {
+        getGirdList();
 
-                    JSONArray jsonArray  = new JSONArray(result);
-                    for (int i =0;i<jsonArray.length();i++){
-                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                        int id = jsonObject.getInt("id");
-                        String icon = jsonObject.getString("icon");
-                        String name = jsonObject.getString("name");
-                        message = new GirdMessage(id,icon,name);
-                        list.add(message);
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Message message = new Message();
-                message.what = 1;
-                handler.sendMessage(message);
-
-            }
-
-
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -184,7 +168,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        srl.setColorSchemeResources(R.color.color1,R.color.color2,R.color.color3,R.color.color4);
+        srl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getGirdList();
+                        srl.setRefreshing(false);
+                    }
+                }, 2000);
 
+
+            }
+        });
 
 
     }
@@ -224,7 +223,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ln_touxiang:{
-
+//                Intent intent2 = new Intent("android.intent.action.GET_CONTENT");
+//                intent2.setType("image/*");
+//                startActivityForResult(intent2,3);
 
             }
             break;
@@ -248,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
             case R.id.ln_shoucang:{
                 Intent intent = new Intent(MainActivity.this,QuestionList.class);
+                intent.putExtra("leibie","收藏");
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
 //                Toast.makeText(MainActivity.this, "sousuo", Toast.LENGTH_SHORT).show();
@@ -264,6 +266,74 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             break;
         }
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode){
+//            case 3:{
+//                if (resultCode==RESULT_OK){
+//                    handleImageOnKitKat(data);
+//                }
+//            }
+//        }
+//    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void handleImageOnKitKat(Intent data) {
+//        String imagePath = null;
+//        Uri uri = data.getData();
+//        if (DocumentsContract.isDocumentUri(this,uri)){
+//            String docId = DocumentsContract.getDocumentId(uri);
+//            if (DocumentsContract)
+//        }
+
+    }
+
+    private void getGirdList(){
+        RequestParams params = new RequestParams("http://115.29.136.118:8080/web-question/app/catalog?method=list");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+
+                    JSONArray jsonArray  = new JSONArray(result);
+                    for (int i =0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                        int id = jsonObject.getInt("id");
+                        String icon = jsonObject.getString("icon");
+                        String name = jsonObject.getString("name");
+                        message = new GirdMessage(id,icon,name);
+                        list.add(message);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+
+            }
+
+
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }
 

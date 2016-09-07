@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     android:background="#FFECEDEF"
     tools:context=".SousuoActivity">
-    <include layout="@layout/topbar">
+    <include layout="@layout/topbar"
+        android:id="@+id/sousuo_topbar">
 
     </include>
     <LinearLayout
+        android:id="@+id/ll_sousuo"
+        android:layout_below="@id/sousuo_topbar"
         android:layout_width="match_parent"
         android:layout_height="46.0dip"
         android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp">
 
         <EditText
             android:id="@+id/et_search"
@@ -46,9 +52,21 @@
     <!-- /titlebar -->
 
     <ListView
+        android:layout_below="@id/ll_sousuo"
         android:id="@+id/lv_question_sousuo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+
         android:cacheColorHint="@android:color/transparent" >
     </ListView>
-</LinearLayout>
+    <TextView
+        android:layout_below="@id/lv_question_sousuo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_sousuoweibuju"
+        android:layout_centerHorizontal="true"
+        android:text="已加载全部"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"/>
+</RelativeLayout>

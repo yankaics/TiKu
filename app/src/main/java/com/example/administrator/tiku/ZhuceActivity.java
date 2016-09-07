@@ -1,8 +1,10 @@
 package com.example.administrator.tiku;
 
+import android.graphics.Color;
 import android.icu.text.BreakIterator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +34,16 @@ public class ZhuceActivity extends AppCompatActivity implements View.OnClickList
 
     @ViewInject(R.id.btn_zhuce_ok)
     private Button btn_ok;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        setTitle("注册账号");
+        toolbar = (Toolbar) findViewById(R.id.tl_custom);
+        toolbar.setTitle("登陆");//设置Toolbar标题
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF")); //设置标题颜色
+        toolbar.setBackgroundColor(Color.parseColor("#97282F"));
+        setSupportActionBar(toolbar);
 
         btn_ok.setOnClickListener(this);
 

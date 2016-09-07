@@ -247,7 +247,7 @@ public class GetList {
                 String content = jsonObject.getString("content");
                 int id = jsonObject.getInt("id");
 
-                int pubTime = jsonObject.getInt("pubTime");
+                long pubTime = jsonObject.getLong("pubTime");
                 int typeid = jsonObject.getInt("typeid");
                 String answer =jsonObject.getString("answer");
                 int cataid = jsonObject.getInt("cataid");
@@ -285,7 +285,7 @@ public class GetList {
 //                System.out.println(content+"=======================================");
                 int id = jsonObject.getInt("id");
 //                System.out.println(id+"=======================================");
-                int pubTime = jsonObject.getInt("pubTime");
+                long pubTime = jsonObject.getLong("pubTime");
 //                System.out.println(pubTime+"=======================================");
                 int typeid = jsonObject.getInt("typeid");
 //                System.out.println(typeid+"=======================================");

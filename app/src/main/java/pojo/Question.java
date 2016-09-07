@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Question implements Serializable{
     String content;
     int id;
-    int pubTime;
+    long pubTime;
     int typeid;
     String answer;
     int cataid;
@@ -17,7 +17,7 @@ public class Question implements Serializable{
     public Question() {
     }
 
-    public Question(String content, int id, int pubTime, int typeid, String answer, int cataid, String options) {
+    public Question(String content, int id, long pubTime, int typeid, String answer, int cataid, String options) {
         this.content = content;
         this.id = id;
         this.pubTime = pubTime;
@@ -43,11 +43,11 @@ public class Question implements Serializable{
         this.id = id;
     }
 
-    public int getPubTime() {
+    public long getPubTime() {
         return pubTime;
     }
 
-    public void setPubTime(int pubTime) {
+    public void setPubTime(long pubTime) {
         this.pubTime = pubTime;
     }
 

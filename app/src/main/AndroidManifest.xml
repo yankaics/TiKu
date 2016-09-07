@@ -3,7 +3,7 @@
     package="com.example.administrator.tiku">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name="appliction.MyAppliction"
         android:allowBackup="true"
@@ -21,9 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".FragmentActivity" />
-        <activity android:name=".ZhuceActivity" />
+        <activity android:name=".ZhuceActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
             android:name=".QuestionList"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

@@ -1,15 +1,21 @@
 package com.example.administrator.tiku;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import collector.ActivityCollector;
 
@@ -19,6 +25,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tv_nichengshezhi,tv_bianhuadenglu,tv_bianhuatupian,tv_tuichudenglu,tv_qingchuhuancun,tv_guanyuwomen;
     private CheckBox cb_tupian,cb_denglu;
     boolean b,f;
+    SharedPreferences pref;
+    ActivityCollector activityCollector;
 
     @Override
     protected void onDestroy() {
@@ -31,7 +39,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_setting);
         ActivityCollector.addActivity(this);
         toolbar = (Toolbar) findViewById(R.id.tl_custom);
-
         toolbar.setTitle("设置");//设置Toolbar标题
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF")); //设置标题颜色
         toolbar.setBackgroundColor(Color.parseColor("#97282F"));
@@ -56,6 +63,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         cb_denglu.setOnClickListener(this);
         cb_tupian.setOnClickListener(this);
 
+        pref = getSharedPreferences("nickname",MODE_PRIVATE);
 
         SharedPreferences pref = getSharedPreferences("zddl",MODE_PRIVATE);
         b = pref.getBoolean("zddl",true);
@@ -63,6 +71,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences pref2 = getSharedPreferences("zddl",MODE_PRIVATE);
         f = pref.getBoolean("xstp",true);
         cb_tupian.setChecked(f);
+
 
     }
 
@@ -86,24 +95,50 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
 
     }
-
+    EditText ed_setname;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_nichengshezhi:{
+                AlertDialog.Builder builder = new AlertDialog.Builder((SettingActivity.this));
+                builder.setIcon(R.mipmap.login_user_hightlighted);
+                builder.setTitle("昵称设置");
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View nickname = inflater.inflate(R.layout.dialogitem,null);
+                builder.setView(nickname);
+                ed_setname = (EditText) nickname.findViewById(R.id.ed_setname);
+                String nick = pref.getString("nickname","qwer");
+                ed_setname.setText(nick);
+                builder.setPositiveButton("确定", new AlertDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences.Editor editor = getSharedPreferences("nickname",MODE_PRIVATE).edit();
+                        editor.putString("nickname",ed_setname.getText().toString());
+                        editor.commit();
+                    }
+                });
+                builder.setNegativeButton("取消", new AlertDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
 
             }
             break;
             case R.id.tv_tuichudenglu:{
+                Intent i = new Intent(SettingActivity.this,LoginActivity.class);
+                startActivity(i);
 
             }
             break;
             case R.id.tv_qingchuhuancun:{
-
+                Toast.makeText(SettingActivity.this,"清除缓存",Toast.LENGTH_SHORT).show();
             }
             break;
             case R.id.tv_guanyuwomen:{
-
+                Toast.makeText(SettingActivity.this,"刘立臣制作",Toast.LENGTH_SHORT).show();
             }
             break;
             case R.id.cb_tupian:{

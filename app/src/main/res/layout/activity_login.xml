@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99eeeeee"
+    android:background="#EEEEEEEE"
     android:orientation="vertical"
     tools:context="com.example.administrator.tiku.LoginActivity">
+    <include layout="@layout/topbar"
+        >
+    </include>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,9 +23,11 @@
         android:background="@android:color/white"
         android:id="@+id/ed_username"
         android:hint="@string/hint_username"
+        android:textColorHint="@android:color/darker_gray"
         android:drawableLeft="@drawable/ic_username_selector"
         android:drawablePadding="16dp"
         android:paddingLeft="16dp"
+        android:textColor="#000000"
         android:singleLine="true"
         android:textSize="16sp"/>
     <View
@@ -37,6 +42,8 @@
         android:background="@android:color/white"
         android:id="@+id/ed_pwd"
         android:hint="@string/hint_pwd"
+        android:textColor="#000000"
+        android:textColorHint="@android:color/darker_gray"
         android:inputType="textPassword"
         android:drawableLeft="@drawable/ic_pwd_selector"
         android:drawablePadding="16dp"

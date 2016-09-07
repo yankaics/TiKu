@@ -57,7 +57,7 @@ public class QuestionList extends AppCompatActivity {
 //        System.out.println("cataid:"+cataid+"==========================");
 
         lv_question = (ListView) findViewById(R.id.lv_question);
-        toolbar = (Toolbar) findViewById(R.id.tl_custom);
+        toolbar = (Toolbar) findViewById(R.id.questionlist_topbar);
         toolbar.setTitle(leibie);//设置Toolbar标题
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF")); //设置标题颜色
         toolbar.setBackgroundColor(Color.parseColor("#97282F"));
@@ -65,9 +65,11 @@ public class QuestionList extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        list = getFenleiList(cataid);
-
+        if (leibie.equals("收藏")){
+            list = getShoucangList(2);
+        }else {
+            list = getFenleiList(cataid);
+        }
 
 
 
@@ -101,6 +103,8 @@ public class QuestionList extends AppCompatActivity {
                 Intent intent1 = new Intent(QuestionList.this,QuestionActivity.class);
 
                 intent1.putExtra("question",list.get(position));
+                intent1.putExtra("idInList",position);
+                intent1.putExtra("listsize",list.size());
                 startActivity(intent1);
                 overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
             }
@@ -172,31 +176,31 @@ public class QuestionList extends AppCompatActivity {
         try {
             JSONObject json = new JSONObject(s);
             String c = json.getString("content");
-//            System.out.println(c);
+            System.out.println(c);
             JSONArray jsonArray = new JSONArray(c);
             for (int i = 0 ;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String content = jsonObject.getString("content");
-//                System.out.println(content+"=======================================");
+                System.out.println(content+"=======================================");
                 int id = jsonObject.getInt("id");
-//                System.out.println(id+"=======================================");
-                int pubTime = jsonObject.getInt("pubTime");
-//                System.out.println(pubTime+"=======================================");
+                System.out.println(id+"=======================================");
+                long pubTime = jsonObject.getLong("pubTime");
+                System.out.println(pubTime+"=======================================");
                 int typeid = jsonObject.getInt("typeid");
-//                System.out.println(typeid+"=======================================");
+                System.out.println(typeid+"=======================================");
                 String answer =jsonObject.getString("answer");
-//                System.out.println(answer+"=======================================");
+                System.out.println(answer+"=======================================");
                 int cataid = jsonObject.getInt("cataid");
-//                System.out.println(cataid+"=======================================");
+                System.out.println(cataid+"=======================================");
                 if (typeid == 1 || typeid ==2){
                     options= jsonObject.getString("options");
-//                    System.out.println(options+"=======================================");
+                    System.out.println(options+"=======================================");
                 }else{
                     options = "";
                 }
 
                 question = new Question(content,id,pubTime,typeid,answer,cataid,options);
-//                System.out.println(content+id+pubTime+typeid+answer+cataid+"====================================");
+                System.out.println(content+id+pubTime+typeid+answer+cataid+"====================================");
                 lists.add(question);
             }
         } catch (JSONException e) {
@@ -206,4 +210,44 @@ public class QuestionList extends AppCompatActivity {
 
         return lists;
     }
+    public List<Question> getShoucangList(int i){
+//        System.out.println(i+"***************************************");
+        RequestParams params = new RequestParams("http://115.29.136.118:8080/web-question/app/mng/store?method=list");
+        params.addBodyParameter("userId", String.valueOf(i));
+        x.http().post(params, new Callback.CacheCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+
+                System.out.println(result);
+                list = jsonXList(result);
+
+                Message message = new Message();
+                message.what = 2;
+                QuestionList.handler.sendMessage(message);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+        return list;
+    }
+
 }

@@ -2,10 +2,12 @@ package com.example.administrator.tiku;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,12 +45,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Handler handler;
     private LoadingDialog dialog;
+
+    ActivityCollector activityCollector;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         ActivityCollector.addActivity(this);
-        setTitle("登录");
+        toolbar = (Toolbar) findViewById(R.id.tl_custom);
+        toolbar.setTitle("登陆");//设置Toolbar标题
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF")); //设置标题颜色
+        toolbar.setBackgroundColor(Color.parseColor("#97282F"));
+        setSupportActionBar(toolbar);
+
 
 
         btn_login.setOnClickListener(this);
@@ -156,5 +166,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        activityCollector.removeActivity(this);
+        activityCollector.finishAll();
     }
 }

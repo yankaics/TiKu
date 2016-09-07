@@ -8,19 +8,26 @@
 <!--主布局-->
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-   <GridView
-       android:id="@+id/test_gridview"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+   <android.support.v4.widget.SwipeRefreshLayout
+       android:id="@+id/srl"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:scrollbarStyle="outsideOverlay"
-       android:stretchMode="columnWidth"
-       android:layout_marginTop="10dp"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
-       android:numColumns="2"
-       android:verticalSpacing="10dp"
-       android:horizontalSpacing="10dp"></GridView>
+       android:layout_height="match_parent">
+      <GridView
+          android:id="@+id/test_gridview"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scrollbarStyle="outsideOverlay"
+          android:stretchMode="columnWidth"
+          android:layout_marginTop="10dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:numColumns="2"
+          android:verticalSpacing="10dp"
+          android:horizontalSpacing="10dp"></GridView>
+   </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>
 <!--侧滑菜单-->
 <RelativeLayout
